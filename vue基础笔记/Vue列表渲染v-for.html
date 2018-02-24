@@ -30,15 +30,15 @@
 				       index参数，是数组下标 -->
 			    <li v-for="(val,index) in allObj">      
 				    {{index}}, => {{val.name}}
-				</li>
+			    </li>
 			 </ul>
 			 
 			 
 			 <!-- 遍历对象 -->
 			 <h4>个人信息:</h4>
 		       <!--  val  是对象的属性值，
-					 key参数  是对象的属性名(不可随意变更)
-					 index参数 是键值对的序列(不可随意变更) -->
+			     key参数  是对象的属性名(不可随意变更)
+			     index参数 是键值对的序列(不可随意变更) -->
 			 <p v-for="(val,key,index) in myInfo">
 				  {{index}},{{key}},{{val}}    
 			 </p>
