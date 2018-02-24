@@ -1,0 +1,8 @@
+vue脚手架详解读：（上 中  下  完）
+         http://www.jianshu.com/p/1626b8643676   
+
+项目链接github地址  
+        https://github.com/datura-lj/vue_cli_demo
+
+vue学习目录汇总：（vue各大知识点）
+        http://www.jianshu.com/p/dc5057e7ad0d 
