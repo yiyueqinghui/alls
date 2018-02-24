@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue模板</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<style>
+	    .red{
+		   color:red;
+		}
+		.blue{
+		   color:blue;
+		}
+	    
+	</style>
+	<body>
+	    <p>
+		   <h4>Vue模板</h4>
+		   <dl>
+		      <dd>
+			     <h5>1. html模版(插值)</h5>
+				 <p>
+				    文本：使用“Mustache”语法（大括号）{{value}}  <br/>			
+					作用：替换实例上的属性值，当值改变时，插值内容会被自动更新。也可使用v-text="value"代替。
+					<!-- eg:<p>{{ value }}<p>  等价于  <p v-text="value"></p> -->				 
+				 </p>
+				 <p>
+				    原生的html：双大括号输出的文本，不会解析html标签。<br/>
+					就是说当实例的data为html标签时，不能解析而是直接输出出来。此时如想要解析，可使用v-html="value"代替。				 
+				 </p>
+			     
+			  </dd>
+		      <dd>
+			     <h5>2. 字符串模版</h5>
+				 <p>
+				   template字符串:<br/>
+				   tempalte => 选项对象的属性<br/>
+				   模版将会替换挂载的元素。挂载元素的内容都会被忽略，注意根节点只能有一个，
+				   将html结构写在一对script标签中，设置type="x-template"。
+				 
+				 </p>
+			  
+			  </dd>
+		      <dd></dd>
+		   </dl>
+		
+		</p>
+		<hr/>
+		<div id="app" v-cloak >
+		      <h1>1,html模版(插值)</h1>
+		      <p>{{value}}</p>
+			  <p v-html='value'></p>
+					  
+			  <h4 :class='{red:show}'>标题</h4>   <!-- 注意此处的show为data内的一个布尔值数据，若真则添加red的class，若假则移除red的class -->
+			  <p :class='{red:show,blue:!show}'>根据真假选择样式</p>
+			  <hr/>
+			  
+			  <h1>2.字符串模版</h1>
+			  <h5>字符串模板的三种方法</h5>
+			  <ul>
+			     <li>
+				     方法一， 自定义字符串法   eg:#app01
+				 </li>
+				 <li>
+				     方法二， 利用script标签对内定义模版，cript标签中，设置type="x-template"。
+					 局限性：不能跨文件使用，一个页面中可以使用   eg:#app
+				 </li>
+				 <li>
+				     方法三， 代码片段放在template标签里，并给一个id名。   eg:#app02
+				 </li>
+			  </ul>
+			  
+		</div>
+		
+		<div id="app01" v-cloak>
+		
+		</div>
+		
+		
+		<template id="tem">
+		    <i>字符串模板</i>
+	    </template>
+		<div id="app02" v-cloak>
+		 
+		</div>
+		
+		
+        
+	</body>
+	<!-- 字符串模板的方法二，
+	         代码片段 利用script标签对内定义模版，
+	         局限性：不能跨文件使用，一个页面中可以使用 -->
+	<script type='x-template' id="str">
+	    <i>字符串模板</i>
+	</script>
+	<script>
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  value:'<b>我是一个加粗标签</b>',
+			  show:false,
+			  num:1
+			},
+			tempalte:'#str',
+            			
+	    })
+			
+	</script>
+	
+	
+	<!-- 字符串模板的方法一
+            自定义字符串	-->
+	<script>
+	    var str = '<i>字符串模板</i>';
+		var vm01 = new Vue({
+		    el:"#app01",
+			tempalte:str
+		})
+	
+	</script>
+	
+	
+	<!-- 字符串模板的方法三
+             代码片段放在template标签里，并给一个id名。	-->
+	<script>
+		var vm01 = new Vue({
+		    el:"#app01",
+			tempalte:'#tem'
+		})
+	
+	</script>
+	
+	
+	
+	
+</html>

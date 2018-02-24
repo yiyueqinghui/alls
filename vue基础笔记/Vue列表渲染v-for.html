@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>列表渲染v-for</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+	    <p>
+		   vue提供一组数组的操作方法(不是原生的dom方法)，将触发视图更新：<br/>
+		   <ul>
+		      <li>push()   向数组最后添加一个新元素</li>
+		      <li>pop()  删除并返回数组的最后一个元素</li>
+		      <li>shift() 删除并返回数组的第一个元素</li>
+		      <li>unshift() 向数组开头添加一个新元素</li>
+		      <li>splice(start,num,newElement,newElement) 
+ 			      从start开始，删除num个元素，并且将newElement插入start后面 
+			  </li>
+		      <li>sort()  对数组里的元素进行排序</li>
+			  <li>reverse() 对数组进行反向排列</li>
+		    </ul>
+			<p>join('') 将数组中的元素按照指定的标识符进行拼接成字符串（原生js方法）</p>
+		</p>
+		<hr/>
+		<div id="app">
+		     <!-- 遍历数组 -->
+			 <ul>
+			     <!--  val 是数组的每一项   
+				       index参数，是数组下标 -->
+			    <li v-for="(val,index) in allObj">      
+				    {{index}}, => {{val.name}}
+				</li>
+			 </ul>
+			 
+			 
+			 <!-- 遍历对象 -->
+			 <h4>个人信息:</h4>
+		       <!--  val  是对象的属性值，
+					 key参数  是对象的属性名(不可随意变更)
+					 index参数 是键值对的序列(不可随意变更) -->
+			 <p v-for="(val,key,index) in myInfo">
+				  {{index}},{{key}},{{val}}    
+			 </p>
+		
+			 
+		</div>
+        
+	</body>
+	<script>
+     
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			   allObj:[
+			     {name:'cj',fruit:'apple'},
+			     {name:'cjj',fruit:'bananal'},
+			     {name:'cjff',fruit:'pear'},
+			     {name:'cjdds',fruit:'orange'}
+			   ],
+			   myInfo:{
+			      name:'duzuiliunian',
+				  age:27,
+				  sex:'男',
+				  favorite:'read'
+			   }
+			}
+	    })
+		
+		
+	</script>
+</html>

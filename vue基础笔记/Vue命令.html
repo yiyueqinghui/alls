@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue常用指令</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+        <p>
+		  <h4>什么是指令：</h4>
+		  <i>
+		     一种特殊的自定义行间属性（也就是在html标签内写）；<br/>指令的职责就是当其表达式的值改变时相应地将某些行为应用到DOM上，<br/>在Vue中，指令以“v-”开头
+		  </i>
+		  <ul>
+		     <li>v-bind：动态绑定数据。简写为“:” 。=> 以后的:class="{red:boolean}"</li>
+			 <li>v-on ：绑定事件监听器。简写为“@”，例：@click="xxx"；</li>
+			 <li>v-text ：更新数据，会覆盖已有结构。类似{{ msg }} ；</li>
+			 <li>v-show ：根据值的真假，切换元素的display属性；</li>
+			 <li>v-if ：根据值的真假，切换元素会被销毁、重建； => 在dom中已消失</li>
+			 <li>v-else-if ：多条件判断，为真则渲染；</li>
+			 <li>v-else ：条件都不符合时渲染；</li>
+			 <li>v-for ：基于源数据多次渲染元素或模块；</li>
+			 <li>v-model ：在表单控件元素（input等）上创建双向数据绑定（数据源）；</li>
+			 <li>v-pre ：跳过元素和子元素的编译过程；可以用来显示原始 vue 标签指令等，即不用vue来解析,按照正常显示</li>
+			 <li>v-cloak：就是防止页面未加载完成时，显示双大括号标签，通常用在el所指向的标签（#app）上</li>
+			 <li>v-once ：只渲染一次，随后数据更新也不重新渲染；</li>
+			 <li>v-html: 可以更新元素的innerHTML,与{{{        }}}三大括号标签功能一致(一般不建议使用)</li>
+			 <li>v-text: 可以更新元素的文本内容，文本内容既可以放在 {{   }}里面，也可以通过 v-text 放在标签内部</li>
+		  </ul>
+		</p>
+		<div id="app">
+		     <div v-pre>
+			     信息是:{{this will not be compiled}} + {{message}},<br/>
+		          <a style="color:red">注意：控制台没报错幺！</a>
+			 </div>
+			 
+            <hr/>
+			
+             <p>not v-once : {{message}}</p>   <br/>
+			 <div v-once>
+				<p>have v-once: {{message}}</p>
+				<button @click="change">更改message</button>
+			 </div>
+		</div>
+        
+	</body>
+	<script>
+     
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  message:'hellow!'
+			},
+			methods:{
+			  change:function(){
+			     this.message = '更改后的message';
+			  }
+			}
+	    })
+		
+		
+	</script>
+</html>

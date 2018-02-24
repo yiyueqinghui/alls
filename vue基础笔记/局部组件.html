@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> 局部组件</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+	    <p>vue中的组件是一个自定义标签（元素）</p>
+		<p>  局部组件，只能在相应的实例化对象中使用，其他对象无法使用</p>
+		<hr/>
+		<div id="app">
+		   <my-component></my-component>
+		   <common></common>
+		</div>
+		<hr/>
+		<div id="app02">
+		   <!-- 这里无法访问到myComponent组件和common组件，因为其是局部组件，只能在#app内使用 
+		   -->
+		   <myComponent></myComponent>
+		   <common></common>
+		</div>
+        
+	</body>
+	<script>
+	   const Child = {
+	      template:`
+		     <p>第一个组件</p>
+		  `
+	   };
+	   const common = {
+	      template:`
+		     <p>第二个组件</p>
+		  `
+	   }
+	
+	
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  
+			},
+			components:{
+			   myComponent:Child,
+			   common           <!-- 如果组件定义的名字和在html显示的标签名一致就可以省略 -->
+			}
+	    })
+		
+		var vm02 = new Vue({
+		    el:"#app02"
+		})
+		
+		
+	</script>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件模板的编写方式</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<style>
+	    .red{
+		   color:red;
+		}
+	
+	</style>
+	<body>
+	    <p>           当我们的组件模版内容较多的时候，不要用字符串的方式了，比较繁琐。可使用在外部定义一个模版然后在组件注册的时候引用一下.
+		</p>
+		<hr/>
+		<div id="app">
+		   <my-component></my-component> 		   <common></common>
+		   <all></all>
+		</div>
+		<hr/>
+		<div id="app02">
+         <!--
+	     <my-component></my-component> 		                <common></common>  由于这两个组件是局部组件，在#app的实例里边，其他地方无法访问 
+		 -->  
+		   <all></all>
+		</div>
+		
+		
+		<!-- 模板编写的方式一 -->
+		<template id="child01">
+		    <div>
+			    <h1>局部组件一</h1>
+			</div>
+		</template>
+		
+		<template id="all">
+		    <div>
+			    <h4 class="red">全局组件</h4>
+			</div>
+		</template>
+		
+		
+		<!-- 模板编写的方式二 -->
+		<script type="x-template" id="child02">
+		    <div>
+			    <h2>局部组件二</h2>	
+			</div>
+		</script>
+        
+	</body>
+	<script>
+	  <!-- 局部组件 -->
+	   const Child = {
+	      template:"#child01"
+		  
+	   };
+	   const common = {
+	      template:"#child02"
+	   }
+	
+	   <!-- 全局组件 -->
+	   Vue.component("all",{
+		   template:"#all"
+		
+	   })
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  
+			},
+			components:{
+			   myComponent:Child,
+			   common:common
+			}
+	    })
+		
+		
+		
+		var vm02 = new Vue({
+		    el:"#app02"
+		})
+		
+		
+		
+		
+	</script>
+</html>

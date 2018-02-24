@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>杂谈</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+		   <!-- 指令 v-model="" -->
+		    <input type="text" v-model="message" />
+			<p>输入的数据是：{{message}}</p>
+			<!-- <p>新添加的属性值： {{vm.mess}}</p> -->
+		</div>
+        
+	</body>
+	<script>
+        //console.dir()可以显示一个对象所有的属性和方法。
+        //例如：console.dir(document);
+        // 就可查看文档对象（document树）下所有的东西。
+	     console.dir(document);
+		 console.dir(Vue);
+       
+	   //在绑定vue实列的时候 不能绑定到body或html标签上
+		var vm = new Vue({
+		    //挂载元素 
+			el:'#app',   
+		    
+			<!-- Vue代理data数据，每个vue实例都会代理其data对象里所有的属性，这些被代理的属性是响应的。新添加的属性不具备响应功能，改变后不会更新视图。 -->
+			data:{
+			  message: "hellow world!!"
+			},
+			computed:{
+			
+			}
+		})
+		<!-- Vue 实例暴露了一些有用的实例属性与方法。它们都有前缀 $，以便与用户定义的属性区分开来 -->
+		console.log(vm.$data);
+		
+		console.log(vm.$el === document.getElementById('app'));
+		
+		
+	</script>
+</html>

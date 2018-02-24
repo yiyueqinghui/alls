@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件内定义子组件（父子组件）</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+	    <p>注意：组件中的数据是以函数的形式的，并且有返回值</p>
+		<hr/>
+		<div id="app">
+		    <my-div></my-div>
+		</div>
+		
+		<!-- 组件模板 -->
+		<template id="parent">
+		     <div>
+			    <h2>{{msg}}</h2>
+				<child01></child01>
+				<child02></child02>
+			 </div>
+		</template>
+		
+		<template id="son01">
+		     <div>
+			     <p>孩子组件01</p>
+			 </div>
+		</template>
+		
+		<template id="son02">
+		     <div>
+			     <p>孩子组件02</p>
+			 </div>
+		</template>
+        
+	</body>
+	<script>
+	   const child01 = {
+	      template:"#son01"
+	   };
+	   const child02 = {
+	      template:"#son02"
+	   };
+	  
+       Vue.component('my-div',{
+	      template:"#parent",
+		  data(){
+		    return {
+			  msg:"父亲组件！！"
+			}
+		  },
+		  components:{
+		     child01:child01,
+			 child02
+		  }
+	   })
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  
+			}
+	    })
+		
+		
+	</script>
+</html>

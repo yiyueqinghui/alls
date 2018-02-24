@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册局部指令—当前组件下可用</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+        <p>
+		    注册局部指令—当前组件下可用<br/>
+			    选项对象的directives属性（注意此处有个s）			
+		</p>
+		<hr/>
+		<div id="app">
+		    <div v-color='fontColor'>局部组件</div>
+		</div>
+        
+	</body>
+	<script>
+     
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  fontColor:'red'
+			},
+			directives:{
+			   'color':function(el,binding){
+			     el.style.color = binding.value;
+			   }
+			
+			}
+	    })
+		
+		
+	</script>
+</html>

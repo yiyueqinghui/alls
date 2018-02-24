@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件修饰符</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+	    <p> 修饰符位置： 以“.”写在事件名称后面.（ v-on:eventName.修饰符 = "xxx"）</p>
+		<h4>事件修饰符</h4>
+		<ul>
+			  <li>.stop（冒泡）</li>
+			  <li>.prevent（默认事件）</li>
+			  <li>.capture（捕获）</li>
+			  <li>.self   只当事件在该元素本身（而不是子元素）触发时触发回调</li>
+			  <li>.once（执行一次）</li>
+		</ul>
+		<h4>按键修饰符（常用的）</h4>
+		<ul>
+			  <li>.enter </li>
+			  <li>.tab </li>
+			  <li>.delete </li>
+			  <li>.esc</li>
+			  <li>.space</li>
+			  <li>.up </li>
+			  <li>.down </li>
+			  <li>.left</li>
+			  <li>.right</li>
+			  <li>.ctrl</li>
+			  <li>.alt </li>
+			  <li>.shift</li>
+			  <li>.meta</li>
+			  <li>.键值</li>
+		</ul>
+		<hr/>
+		<div id="app">
+		      <button @click.once = "pop">只执行一次</button>
+			  
+			  <input type="date" v-on:keyup.up ="pop02" />
+			  
+			  <p @click.self='pop03' style="background:red;">
+			    <a>子元素</a>
+			  </p>
+		</div>
+        
+	</body>
+	<script>
+     
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  
+			},
+			methods:{
+			   pop:function(){
+			       alert("111");
+			   },
+			   pop02:function(){
+			       alert("up");							
+			   },
+			   pop03:function(){
+			       alert("self");							
+			   }
+			   
+			}
+	    })
+		
+		
+	</script>
+</html>

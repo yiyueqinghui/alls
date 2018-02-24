@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue-router 导航钩子之单个路由的钩子</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+  <p>
+    vue-router 提供的导航钩子主要用来拦截导航，让它完成跳转或取消<br/>
+	有多种方式可以在路由导航发生时执行钩子： 
+	1.全局的 
+	   <!-- //定义一个路由 -->
+		<!-- const router = new VueRouter({ -->
+
+		<!-- }) -->
+
+		<!-- // 点击导航前调用 -->
+		<!-- router.beforeEach((to, from, next) => { -->
+		  <!-- ... -->
+		  
+		  <!-- next()   //next()允许跳转    next(false) 禁止跳转     next('/')跳转到 一个不同的地址 -->
+		<!-- }) -->
+		
+		<!-- // 点击导航后调用 -->
+		<!-- router.afterEach(route => { -->
+		  <!-- // ... -->
+		<!-- }) -->
+	   
+	2.单个路由独享的 
+	    <!-- const router = new VueRouter({ -->
+		  <!-- routes: [ -->
+			<!-- { -->
+			  <!-- path: '/foo', -->
+			  <!-- component: Foo, -->
+			  <!-- beforeEnter: (to, from, next) => { -->
+				<!-- // ... -->
+			  <!-- } -->
+			<!-- } -->
+		  <!-- ] -->
+		<!-- }); -->
+	
+	
+	3.组件级的
+  </p>
+  <div id="box">
+    <!-- 跳转路径 -->
+    <router-link to="/home">home</router-link>
+    <router-link to="/news">news</router-link>
+    <div>
+      <router-view></router-view>
+    </div>
+  </div>
+  <script type="text/javascript">
+  var News = {
+    template:` 
+    <div>
+        <h3>新闻</h3>
+    </div>
+    `
+  };
+  
+  var Newss = {
+    template:` 
+    <div>
+        <h3>新闻001</h3>
+    </div>
+    `
+  };
+
+  var Home = {
+    template: '<h3>主页</h3>'
+  };
+  <!-- // 配置路由 -->
+  var jump = [
+  {
+    path: '/home',
+    component: Home
+  }, 
+  {
+    path: '/news',
+    component: News,
+	<!-- 单个路由独享的钩子 -->
+	beforeEnter: (to, from, next) => {
+	    console.log('打印消息如下');
+        console.log(to,from);
+		next();
+    }
+    
+  },
+  {
+    path: '/newss',
+    component: Newss,
+	
+  
+  },
+  {
+    path: '*',
+    redirect: '/home'
+  }];
+  <!-- // 创建实例 -->
+  var router = new VueRouter({
+    routes: jump
+  });
+  
+
+  
+  // 挂载实例
+  var app = new Vue({
+    el: '#box',
+	data:{
+	   num:0
+	},
+    router: router
+  })
+  </script>
+</body>
+
+</html>

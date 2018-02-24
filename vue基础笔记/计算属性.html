@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+	    <p>
+		  解析：计算属性和数据使用的方式一样。
+					  页面加载的时候后触发get函数，
+					  当点击事件后会触发set函数。
+		</p>
+		<p>
+		   由于计算属性有缓存，故如果结果值不变，
+		   又需要多次调用的话，可以用计算属性的缓存，
+		   来提高页面的加载速率
+		</p>
+	    <hr/>
+		
+		<div id="app">
+		    <label>单价</label><input type="number" disabled value="29.9"/><br/>
+		    <label>数量</label><input type="number" v-model="num"  @keyup.enter="change" /><br/>
+			<label>总价</label><input type="number" v-model="myData" />
+			<p>计算的结果是： {{myData}}</p>
+		</div>
+        
+	</body>
+	<script>
+     
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			   num:1,
+			   myData02:0
+			},
+			methods:{
+			   change:function(){
+			    //当通过事件改变计算属性值的时候,才会去触发该属性的set方法
+			      this.myData = this.num;     
+			   }
+			
+			},
+			computed:{
+			   myData:{
+			    //默认的get方法(页面加载时就主动执行)
+			     get:function(){
+				    alert("get");
+					return (this.num*29.9).toFixed(1);
+				 },
+				//set方法(当事件改变该计算属性值的时候就会自动触发set方法)
+				 set:function(val){
+				    alert("set");
+					prompt("订单信息已确定");
+					return this.num = val;
+				 }
+			   
+			   }  
+			
+			}
+			
+	    })
+		
+		
+	</script>
+</html>
