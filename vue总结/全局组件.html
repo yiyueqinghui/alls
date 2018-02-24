@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> 全局组件</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+	    <p>vue中的组件是一个自定义标签（元素）</p>
+		<hr/>
+		<div id="app">
+		    <my-div></my-div>
+		</div>
+        
+	</body>
+	<script>
+       Vue.component('my-div',{
+	      template:`
+		      <h2>全局组件</h2>
+		      `
+	   })
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  
+			}
+	    })
+		
+		
+	</script>
+</html>

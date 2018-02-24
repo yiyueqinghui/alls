@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<p>
+			vue的本质：<br/> 
+			    1,每个 Vue应用 都是通过 Vue 函数 创建一个新的 Vue实例<br/>
+			    2,Vue 实例暴露了一些有用的实例属性与方法。 <br/>
+			             它们都有前缀 $，以便与用户定义的属性区分开来<br />
+			    3,每个 Vue 实例在被创建之前都要经过一系列的初始化过程。<br />
+			          例如需要设置数据监听、编译模板、挂载实例到 DOM、在数据变化时更新 DOM 等。<br />
+			          同时在这个过程中也会运行一些叫做生命周期钩子的函数，给予用户机会在一些特定的场景下添加他们自己的代码。<br />
+			           比如 created 钩子可以用来在一个实例被创建之后执行代码
+			    
+
+		</p>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		var data = {
+			a: 1
+		}
+		var vm = new Vue({
+			el: '#example',
+			data: data,
+			created:function(){
+				alert("实例创建完成，开始执行的代码")
+			}
+		})
+		vm.$data === data // => true
+		vm.$el === document.getElementById('example') // => true
+		// $watch 是一个实例方法
+		vm.$watch('a', function(newValue, oldValue) {
+			// 这个回调将在 `vm.a` 改变后调用
+		})
+	</script>
+
+</html>

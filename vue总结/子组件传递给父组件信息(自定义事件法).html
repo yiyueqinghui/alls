@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>子组件传递数据传递给父组件（自定义事件$emit）</title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- //@add 监听add事件，即add事件触发后执行all事件-->
+			<my-btn @add="all"></my-btn>
+			<my-btn @add="all"></my-btn>
+			<my-btn @add="all"></my-btn>
+			<p>一共点击了{{total}}次</p>
+		</div>
+		
+		<template id="my_btn">
+			<button @click="add">点击了{{count}}</button>
+		</template>
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+		Vue.component('my-btn',{
+			template:"#my_btn",
+			data:function(){
+				return {
+					count:0
+				}
+			},
+			methods:{
+				add:function(){
+					this.count +=1;
+					//通知外界调用了add方法
+					this.$emit('add',[1,2]);
+				}
+			}
+		})
+		new Vue({
+			el:"#app",
+			data:{
+				total:0
+			},
+			methods:{
+				all:function(type){     //用参数来接受$emit传递过来的参数
+				    console.log(type);
+					this.total +=1;
+					
+				}
+			}
+			
+		})
+	</script>
+</html>

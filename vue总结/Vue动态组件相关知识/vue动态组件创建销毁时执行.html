@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue动态组件切换时触发的事件( activated / deactivated ）</title>
+		<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+	</head>
+	<body>
+		<!--
+			activated 和 deactivated 在 <keep-alive> 树内的所有嵌套组件中触发
+
+		    activated： 组件创建时触发的函数；
+		    deactivated: 组件销毁时触发的函数
+		    　　
+		-->
+		<div id="example">
+			<button @click='change'>切换页面</button>
+			<keep-alive>
+				<component :is="currentView" @pass-data="getData"></component>
+			</keep-alive>
+			<p>{{msg}}</p>
+		</div>
+	</body>
+	<script>
+		new Vue({
+		  el: '#example',
+		  data:{
+		    index:0,
+		    msg:'',    
+		    arr:[
+		      { 
+		        template:`<div>我是主页</div>`,
+		        activated(){
+		          this.$emit('pass-data','主页被添加');
+		        },
+		        deactivated(){
+		          this.$emit('pass-data','主页被移除');
+		        },        
+		      },
+		      {template:`<div>我是提交页</div>`},
+		      {template:`<div>我是存档页</div>`}
+		    ],
+		  },
+		  computed:{
+		    currentView(){
+		        return this.arr[this.index];
+		    }
+		  },
+		  methods:{
+		    change(){
+		      var len = this.arr.length;
+		      this.index = (++this.index)% len;
+		    },
+		    getData(value){
+		      this.msg = value;
+		      setTimeout(()=>{
+		        this.msg = '';
+		      },500)
+		    }
+		  }
+		})
+	</script>
+</html>

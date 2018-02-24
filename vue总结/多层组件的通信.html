@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>多层父子节点的通信(动态绑定v-bind:属性名 = 属性值)</title>
+	</head>
+	<body>
+		<div id="app">
+			<my-parent :message="title" :img-src="img" ></my-parent>
+		</div>
+		<template id="my_img">
+			<div>
+				<img :src="imgSrc" width="200" />
+			</div>
+		</template>
+		
+		<template id="my_title">
+			<div>
+				<h1>{{title}}</h1>
+			</div>
+		</template>
+		
+		<template id="my_parent">
+			<div>
+				<child01 :img-src="imgSrc"></child01>
+				<child02 :title="message"></child02>
+			</div>
+		</template>
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+		//1，子组件的实例
+		let Child01 = Vue.extend({
+			template:"#my_img",
+			props:['imgSrc']
+		});
+		
+		let Child02 = Vue.extend({
+			template:"#my_title",
+			props:['title']
+		})
+		
+		
+//		2,父组件的实例
+		Vue.component('my-parent',{
+			template:"#my_parent",
+			props:['message','imgSrc'],
+			components:{
+				child01:Child01,
+				child02:Child02,
+			}
+		})
+		new Vue({
+			el:"#app",
+			data:{
+			   title:'beautiful!!',
+			   img:'img/1.jpg'
+			}
+		})
+	</script>
+</html>

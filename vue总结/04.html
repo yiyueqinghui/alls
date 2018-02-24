@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>v-if 与 v-show</title>
+	</head>
+	<body>
+		<div id="example">
+			<!--v-if 与 v-else  v-else元素必须紧跟再v-if或者v-else-if元素后面-->
+			<div v-if="Math.random() > 0.5">
+			    Now you see me
+			</div>
+			<div v-else>
+			    Now you don't
+			</div>
+			
+			
+				
+			<!--v-if-->
+			<template v-if="ok">
+			    <h1>Title</h1>
+			</template>
+			
+			<!--v-else-if-->
+			<div v-if="type === 'A'">
+			  A
+			</div>
+			<div v-else-if="type === 'B'">
+			  B
+			</div>
+			<div v-else-if="type === 'C'">
+			  C
+			</div>
+			<div v-else>
+			  Not A/B/C
+			</div>
+			
+			<!--v-show   不支持 <template> 元素，也不支持 v-else-->
+			<h1 v-show="bool">Hello!</h1>
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el: '#example',
+			data: {
+				ok:true,
+				type:'D',
+				bool:true
+			}
+			
+		})
+	
+	</script>
+
+</html>

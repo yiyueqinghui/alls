@@ -1,0 +1,8 @@
+vue双向绑定原理：
+        数据劫持和订阅--发布模式；
+        数据劫持使用的是Object.defineProperty( )中的set和get方法；
+       
+
+
+参考页面
+         https://www.cnblogs.com/libin-1/p/6893712.html

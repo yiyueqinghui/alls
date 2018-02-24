@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件与主体间的数据传递</title>
+	</head>
+	<style>
+		ul{
+			list-style: none;
+		}
+	</style>
+	<body>
+		<p>
+			数据传递的过程：
+			                  首先，组件自定义一个属性，
+			                  随后，在dom结构中将主体要渲染的数据(当作属性值)赋值给组件的这个属性，
+			                  这样，我们就可以在这个组件中读取到主体的数据了
+		
+		</p>
+		<div id="app">
+			<ul>
+				<li-item 
+					v-for='item in message'
+				    v-bind:txt="item"
+				    v-bind:id="item.id"	>
+				</li-item>
+			</ul>
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		Vue.component('li-item',{
+			props:['txt'],
+			template:"<li>{{txt.id+1}}，{{txt.text}}</li>"
+		})
+		
+		var app = new Vue({
+			el:"#app",
+			data:{
+				message:[
+				   {"id":0,"text":"beijing"},
+				   {"id":1,"text":"shanghai"},
+				   {"id":2,"text":"nanjing"}
+				]
+			}
+		})
+	</script>
+</html>

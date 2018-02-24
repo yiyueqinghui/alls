@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	</head>
+	<style>
+	   ul{
+	      overflow:hidden;
+	   }
+	   ul li{
+	      float:left;
+		  padding:5px 10px;
+		  list-style:none;
+	   }
+	</style>
+	<body>
+		<div id="app">
+		    <div>
+			   <ul>
+			      <li>
+				      <router-link to="/home" >主页</router-link>
+				  </li>
+				  <li>
+				      <router-link to="/news" >新闻</router-link>
+				  </li>
+			   </ul>
+			</div>
+			<div>
+			   <router-view></router-view>
+			</div>
+		</div>
+		
+		<template id="news">
+		   <div>
+		      <h2>新闻页面</h2>
+			  <ul>
+			    <li>
+				   <router-link to="/news/detail/001?a=100">国内</router-link>
+				</li>
+				<li>
+				   <router-link to="/news/detail/002">国际</router-link>
+				</li>
+			  </ul>
+			  <div>
+			       <router-view></router-view>
+			  </div>
+		   
+		   </div>
+		</template>
+   	</body>
+	<script>
+	   <!-- 组件 -->
+	    const home = {
+		   template:"<h2>主页面</h2>"
+		};
+		const news = {
+		   template:"#news"
+		};
+		const detail = {
+		   template:"<p>{{$route.params}}=>  {{$route.query}} =>{{$route.path}}</p>"
+		}
+		
+		
+		<!-- 配置路由 -->
+		const routes = [
+		    {
+			  path:"/home",
+			  component:home
+			},
+			{
+			  path:"/news",
+			  component:news,
+			  children:[
+			     {
+				   path:"detail/:id",
+				   component:detail
+				 }
+			  ]
+			},
+			{
+			  path:"*",         <!-- 默认路由 -->
+			  redirect:"/home"
+			}
+		
+		]
+		//生成路由实例
+		const router = new VueRouter({
+		    routes
+		})
+		
+		//挂在到vue实例上
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  
+			},
+			router
+	    })
+		
+		
+	</script>
+</html>

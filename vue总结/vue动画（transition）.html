@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件之三   使用 Prop 传递数据</title>
+	</head>
+	<style>
+	   .site{
+	      width:200px;
+		  height:200px;
+		  background:red;
+		  transform:translateX(100PX);
+	   }
+	   
+	  
+	   .fade-enter,.fade-leave-active{
+	      transform:translateX(-300px);
+	   }
+	   .fade-enter-active,.fade-leave-active{
+	      transition:all 1s;
+	   }
+	
+	</style>
+	<body>
+        <p>
+			用一个transition对元素或者组件进行封装.<br/> 
+			在过渡的时候，会有 4 个(CSS)类名在 enter/leave 的过渡中切换。<br/> 
+			v-enter: 定义进入过渡的开始状态。在元素被插入时生效，在下一个帧移除。<br/> 
+			v-enter-active: 定义进入过渡的结束状态。在元素被插入时生效，在 transition/animation 完成之后移除。<br/> 
+			v-leave: 定义离开过渡的开始状态。在离开过渡被触发时生效，在下一个帧移除。<br/> 
+			v-leave-active: 定义离开过渡的结束状态。在离开过渡被触发时生效，在 transition/animation 完成之后移除。
+		</p>
+		<div id="counter-event-example">
+		    <button @click='slide'>动画开始结束</button>
+		    <transition name='fade'>
+			    <child v-show='show'></child>
+			</transition>
+			
+		   
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		Vue.component('child', {
+		  template: '<div class="site"></div>'
+		})
+		new Vue({
+			el: '#counter-event-example',
+			data: {
+				show:false
+			},
+			methods:{
+			   slide:function(){
+			      this.show = !this.show;
+			   }
+			}
+		})
+	</script>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue绑定style/绑定class方法</title>
+		<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+	</head>
+	<style>
+		.center{
+			text-align: center;
+		}
+		.classA{
+			background-color:red;
+		}
+		.classB{
+			color:gray;
+		}
+	</style>
+	<body>
+		<div id="app">
+			<!--方法一   直接绑定一个data对象数据 -->
+			<p :style="obj" >style使用方法测试一</p>
+			<!--方法二   直接绑定一个对象 -->
+			<p :style="{fontSize:size,color:'blue',textAlign:'center'}">style使用方法测试二 </p>
+			
+			<!--方法一  直接绑定一个data对象数据-->
+			<p class="center" :class="classAll">class使用方法一</p>
+			<!--方法二 直接绑定一个对象-->
+			<p class="center" :class="{classA:false,classB:b}">class使用方法二</p>
+			
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el:'#app',
+			data:{
+//				style绑定
+				obj:{
+					color:'red',
+					fontWeight:800,
+					backgroundColor:'lightgrey',
+					textAlign:"center"
+				},
+				size:"25px",
+				
+//				class绑定
+                classAll:{
+                	classA:true,
+                	classB:false
+                },
+                b:true
+				
+			}
+		})
+	</script>
+</html>

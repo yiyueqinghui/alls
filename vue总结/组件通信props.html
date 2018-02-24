@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<my-div :message="mess"  :img-src='imgSrc'></my-div>    <!--通过父节点data传递过来的数据-->
+			<my-div message="今天大晴天" img-src='img/1.jpg'></my-div>   <!--通过父节点的属性  传递下去的数据-->
+			<my-div></my-div>
+		</div>
+		<template id="my_div">
+			<div>
+				<h1>{{message}}</h1>
+				<img :src="imgSrc" width="200" />
+			</div>
+		</template>
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+		//1，创建组件
+		Vue.component('my-div',{
+			template:"#my_div",
+			props:['message','imgSrc']
+		})
+		new Vue({
+			el:"#app",
+			data:{
+				mess:'见天天气',
+			    imgSrc:"img/2.jpg"
+			}
+		})
+	</script>
+</html>

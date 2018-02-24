@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<button @click='addArray'>click me</button>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				numberArray: [1, 2, 3, 4, 5, 6, 7]
+			},
+			watch: {
+				//监听数组或对象的形式 以对象的书写形式去写
+				//key还是其代表要监听的的属性名
+				//对象的形式写法第一个key是hanler其val值是一个函数
+				//对象的形式写法第二个key是deep其val值是布尔值 真是深度监听 假是不深度监听
+				numberArray:{
+					handler:function(val,oldVal) {
+						console.log(val);
+						console.log(oldVal);
+					},
+					deep:true
+				}
+			},
+			methods: {
+				addArray: function() {
+
+					var Random = parseInt(Math.random() * 1000)
+
+					this.numberArray.push(Random);
+				}
+			}
+		})
+	</script>
+
+</html>

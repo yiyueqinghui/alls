@@ -1,0 +1,31 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+#app{
+	width:100%;
+	max-width:800px;
+	margin:0 auto;
+}
+#app .appHead{
+	padding:5px;
+	text-align:center;
+	color:#ffffff;
+	background-color:red;
+}
+#app .import input{
+	
+}
+#app .list{
+	width:100%;
+	padding:8px 12px;
+	border:1px solid #000000;
+	margin:5px auto;
+	font-size:20px;
+}
+#app .list input{
+	width：30px;
+	height:30px;
+	
+}

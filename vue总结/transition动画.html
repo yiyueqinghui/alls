@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transition</title>
+    <script src="js/vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            text-align: center;
+
+        }
+        .con{
+            width: 200px;
+            height: 200px;
+            background:lightgrey;
+            overflow: hidden;
+            margin: 0 auto;
+
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background:red;
+            opacity: 1;
+
+        }
+
+        .box-enter-active,.box-leave-active{
+            transition:all 0.8s;
+        }
+        .box-enter{
+            opacity: 0;
+            -webkit-transform: translateX(200px);
+            -moz-transform: translateX(200px);
+            -ms-transform: translateX(200px);
+            -o-transform: translateX(200px);
+            transform: translateX(200px);
+        }
+        .box-leave-active{
+            opacity: 0;
+            -webkit-transform: translateX(200px);
+            -moz-transform: translateX(200px);
+            -ms-transform: translateX(200px);
+            -o-transform: translateX(200px);
+            transform: translateX(200px);
+        }
+        
+        
+        
+        
+        
+    </style>
+</head>
+<body>
+<!--Vue提供的 <transition/> 组件，会在下列四种情况下起作用：-->
+<!--1. 条件渲染（使用v-if）-->
+<!--2. 条件展示（使用了v-show）-->
+<!--3. 动态组件-->
+<!--4. 组件根节点-->
+
+<!--比如，当它进入过渡的时候（隐藏→显示），就会依次发生：-->
+<!--1. 添加.box-enter-->
+<!--2.  删除.box-enter，添加 .box-enter-active-->
+<!--3.  删除.box-enter-active-->
+
+<!--当它离开过渡的时候（显示→隐藏），就会依次发生：-->
+<!--1. 添加.box-leave-->
+<!--2. 删除.box- leave，添加 .box- leave-active-->
+<!--3. 删除.box- leave -active-->
+
+
+    <div id="app">
+         <button @click="chang">切换</button><br/>
+         <div class="con">
+                <transition name="box">
+                    <p  class="box" v-if="bool"></p>
+                </transition>
+         </div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            bool:false
+        },
+        methods:{
+            chang(){
+                this.bool = !this.bool;
+            }
+        }
+    })
+
+
+
+
+</script>
+</html>

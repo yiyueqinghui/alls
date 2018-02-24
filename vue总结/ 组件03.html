@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>全局组件</title>
+	</head>
+	<body>
+		<!--全局组件就是不论在那个vue的实例里边都可以调用的到-->
+		<!--局部组件就是只能在某一个实例里边调用的到-->
+		
+		<div id="app">
+			<my-dae></my-dae>
+		</div>
+		
+		<div id="app01">
+			<my-dae></my-dae>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+//		全局组件的两步合并后的写法
+	//		1,创建组件的构造器
+	//      2,注册一个全局组件
+        Vue.component('my-dae',{
+//      	模板选项
+        	template:`
+        	    <div>
+        	       <input type="date"/>
+        	       <p>今天周二了!</p>
+        	    </div>
+        	`
+        });
+        
+        
+		new Vue({
+			el:"#app",
+			data:{
+			  msg:'今天的天气很好！！！'	
+			}
+		})
+		
+		new Vue({
+			el:"#app01",
+			data:{
+			  msg:'今天的天气很好！！！'	
+			}
+		})
+	</script>
+</html>

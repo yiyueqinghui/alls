@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ref使用在dom节点上，获取dom节点</title>
+    <script  src="js/vue.js"  ></script>
+</head>
+<body>
+    <!--ref 被用来给元素或子组件注册引用信息。-->
+    <!--引用信息将会注册在父组件的 $refs 对象上。
+    <!--如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；-->
+    <!--如果用在子组件上，引用就指向组件实例：&ndash;&gt;-->
+    <div id="app">
+        <div @click="refs">
+            <p ref="txt" id="text">ssssssssssssss</p>
+            <Home></Home>
+        </div>
+    </div>
+</body>
+<script>
+    var Home = {
+        template:`<strong class="son">家畜</strong>`
+    };
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'llllhellow world!'
+        },
+        components:{
+            Home
+        },
+        methods:{
+            refs(){
+                // 方法一，利用ref 获取dom节点 （vue的ref方法）（推荐！！）
+                // $refs相对document.getElementById的方法，会减少获取dom节点的消耗
+                 var dom = this.$refs.txt;
+                 dom.style.color = 'red';
+
+                // 方法二, 利用js语句获取dom节点  (常规方法)
+                // var dom = document.getElementById('text');
+                // dom.style.color = 'red';
+            }
+        }
+    })
+
+
+</script>
+</html>

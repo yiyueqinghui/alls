@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件处理器（指令，绑定事件） — v-on=""</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+	    <p>事件处理函数只有纯粹的逻辑判断，不处理DOM事件的细节。</p>
+	    <p>事件处理函数： 写在Vue实例的methods中统一进行管理。</p>
+		<hr/>
+		<div id="app">
+		<!--如果不给函数传入参数的话，定义的函数也不要传入参数，
+		    只需要一个ev来指定操作对象即可，但是这个ev,你必须在定义的函数中写明参数； -->
+		     <button @click="addTodo">当行间不触发的时候</button>
+			 
+			 
+	    <!-- 如果要给函数传入参数的话，methods中定义的函数的参数必须一一对应，
+			 $event参数是当前函数的操作对象，methods中定义的函数可以用ev来接收 -->
+			 <button @click="decreaseTodo('123',$event)">当行间触发的时候</button>
+		</div>
+        
+	</body>
+	<script>    
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  
+			},
+			methods:{
+			  addTodo:function(ev){
+			     var _this = ev.target;
+				 _this.style.color = 'red';
+			  },
+			  
+			  decreaseTodo:function(data,ev){
+			     console.log(ev);
+				 var _this = ev.target;
+				 console.log(_this);
+			     _this.innerHTML = data;
+			  }
+			  
+			}
+			
+	    })
+		
+		
+	</script>
+</html>

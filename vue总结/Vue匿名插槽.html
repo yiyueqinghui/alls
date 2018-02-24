@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>匿名插槽</title>
+	</head>
+	<body>
+		<div id="app">
+		   <my-slot>
+		   	<!--组件中所有的标签都将自动添加到插槽里边，如果没有内容，则自动显示插槽默认的内容-->
+		   	 <img src="img/1.jpg" width="500"  />
+		   	 <p>图片如上</p>
+		   	 <input type="date"  />
+		   </my-slot>
+		</div>
+		<template id="my_slot">
+			<div id="panel">
+				<h2 class="panel-header">插槽的头部</h2>
+				<!--预留一个插槽-->
+				<slot>slot可以替换任何标签，默认显示的内容</slot>
+				<footer>插槽的尾部</footer>
+			</div>
+		</template>
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+		Vue.component('my-slot',{
+			template:"#my_slot"
+		})
+		
+		new Vue({
+			el:"#app",
+			data:{
+				total:0
+			},
+			methods:{
+			
+			}
+			
+		})
+	</script>
+</html>

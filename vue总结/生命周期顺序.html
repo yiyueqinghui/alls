@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<style>
+		.box{
+			overflow: hidden;
+			margin:  0 auto;
+			width: 200px;
+			height: 200px;
+			background: black;
+			
+			
+		}
+		.box2{
+			margin: 50px auto;
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+	</style>
+	<body>
+		<div class="box">
+			<div class="box2">{{name}}</div>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el:'.box',
+			data:{
+				name:'小明'
+			},
+			//vue实例创建之前走的函数
+			//实例创建完成
+			beforeCreate:function(){  //比如我怀了一个小孩还没有生下来
+				console.log('1-beforCreate 创建实例之前');
+			},
+			created:function(){ //我怀的小孩已经生下来了
+				console.log('2-created 创建完成'); //在这个时候实例也是出来了 可以去修改vuejs的数据但是不能操作DOM
+			},
+			//挂载到DOM模板上之前   //小孩已经生下来了 但是小孩这个年纪不会做事
+			beforeMount:function(){
+				//挂载DOM之前 我们可以去操作vuejs数据 但是不能操作DOM
+				console.log('3-beforeMount 挂载到DOM模板上之前');
+			},
+			//数据或我在VUEJS定义的变量 已经选软到DOM上去了
+			mounted:function(){ //小孩已经长大了 可以去做事情了  
+				this.name = '大明';
+				//DOM已经挂载上去了 我们可以操作DOM了
+				console.log('4-mounted VUEJS的实例已经挂载到DOM上去了 操作DOM');
+			},
+			//数据改变之前
+			beforeUpdate:function(){
+				console.log('5-beforUptate 数据改变之前');
+			},
+			//数据改变之后
+			updated:function(){
+				console.log('6-uptated 数据改变之后 ');
+			},
+			//路由组件激活之前
+			activated:function(){
+				console.log('7-activated 路由组件激活之前 ');
+			},
+			//路由组件激活之后
+			deactivated:function(){
+				console.log('8-deactivated 路由组件激活之后 ');
+			},
+			//组件或实例销毁之前
+			beforeDestory:function(){
+				console.log('9-beforeDestory 组件或实列销毁之前 ');
+			},
+			destoryed:function(){
+				console.log('10-destoryed 组件或实列销毁之后 ');
+			},
+			watch:{
+				name:function  (newval,oldval){
+					console.log('新值'+newval+'旧值'+oldval);
+				}
+			}
+		})
+	</script>
+</html>

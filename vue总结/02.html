@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>计算属性和观察者</title>
+	</head>
+
+	<body>
+		<p>
+			Vue 提供了一种更通用的方式来观察和响应 Vue 实例上的数据变动：侦听属性。当你有一些数据需要随着其它数据变动而变动时，
+			你很容易滥用 watch——特别是如果你之前使用过 AngularJS。
+			然而，通常更好的做法是使用计算属性而不是命令式的 watch
+		</p>
+		<div id="example" onreadystatechange="">
+		  <input v-model="message"  />
+		  <p>Computed reversed message: {{ reversedMessage }}</p>
+		  <p>累计反转  {{add}} 次</p>
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		var vm = new Vue({
+		  el: '#example',
+		  data: {
+		    message: '',
+		    reversedMessage:'',
+		    add:''
+		  },
+//		   计算属性,每当要计算的对象发生变化时,相应方法就会自动执行,
+//       有时候效果相等于watch(观察者),不过计算属性有缓存,有利于性能的提升
+		  computed: {
+		    reversedMessage:{
+		    	// 计算属性的 getter
+		    	get:function () {
+				     return this.message.split('').reverse().join('')
+				   },
+		    	set:function(newValue){
+
+		    	}
+		    } 
+		  }
+//		  watch:{
+//		  	message:function(){
+//		  		this.reversedMessage = this.message.split("").reverse().join("");
+//		  	}
+//		  }
+		})
+	</script>
+
+</html>

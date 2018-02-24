@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			<p>{{name}}现在{{age}}岁</p>
+			<p>{{parent}}</p>
+			<button @click='addCount'>click me</button>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el:'#app',
+			data:{
+				count:1,
+				name:'小明',
+				parent:'小明的爸爸',
+				buttonText:''
+			},
+			computed:{
+				age:function(){
+					return this.count * 2;	
+				}
+			},
+			watch:{
+				//值一定要存在才能监听,否则监听不到这个值
+				//监听的值包括属性计算和data里面的值
+				//key值对应你要监听的属性
+				//val是一个函数
+				//函数的第一个参数返回的是改变所监听的新值
+				//函数的第二个参数是返回的是改变之前的旧值
+				//监听的话可以监听所有的数据类型
+				name:function(newval,oldval) {
+					if(newval === '大明'){
+						this.parent = '小明的爸爸已经老了';
+					}
+					if(oldval == '小明'){
+						alert('小明已经长大了');
+					}
+				}
+			},
+			methods:{
+				addCount:function  () {
+					this.name = '大明'
+				}
+			}
+		})
+	</script>
+</html>

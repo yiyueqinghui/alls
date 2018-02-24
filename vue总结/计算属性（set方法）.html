@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<p>{{fullName}}</p>
+			<button @click="deal()">调用计算属性的setter方法</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				firstName:'zhang',
+				lastName:'sanfeng'
+			},
+			methods:{
+				deal:function(){
+					//相等于去调用fullName的set方法
+					this.fullName = 'LIUNIAN chen'   
+				}
+			},
+			
+//			计算属性
+             computed:{
+             	fullName:{
+//           	    get方法
+             	  get:function(){
+             		 return this.firstName + " "+this.lastName;
+             	   },
+             	   //set方法
+             	   set:function(str){   //str是接受方法传过来的参数
+             	   	 let nameArr = str.split(' ');
+             	   	 this.firstName = nameArr[0];
+             	   	 this.lastName = nameArr[1];
+             	   }
+             	   
+             	}
+             	
+             	
+             }
+		})
+		
+		
+//	计算属性和调用方法的区别:
+//	       计算属性有缓存,如果将会调用多次,且结果不改变的话,可以利用缓存来提高效率
+//	      调用方法无缓存， 如果每次返回不同值,则使用函数方法,这样可以减少缓存
+	</script>
+</html>

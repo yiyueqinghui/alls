@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>v-for</title>
+	</head>
+	<body>
+		<div id="example">
+			<!--数组的v-for-->
+		     <ul>
+		     	<li v-for="item in items" >
+		     		{{item.message}}
+		     	</li>
+		     </ul>
+		     <dl>
+		     	<!--注意索引index为索引参数-->
+		     	<dd v-for="(item,index) in arrs">
+		     		{{index}},{{item}}
+		     	</dd>
+		     	
+		     </dl>
+		     
+		     <!--一个对象的 v-for   key参数是对象的属性名     index参数是索引值-->
+		     <div v-for="(value, key, index) in object" >
+			   {{index}},   {{ key }}: {{ value }}
+			 </div>	
+			 
+			 <!--显示过滤/排序结果-->
+			 <ul>
+			 	<li v-for="n in even(numbers)">{{ n }}</li>
+			 </ul>
+			 
+			 <!--一段取值范围的 v-for-->
+			 <div>
+			    <span v-for="n in 10">{{ n }} </span>
+			</div>
+			
+			<!--v-for with v-if-->
+			<!--当它们处于同一节点，v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-for 循环中。
+		    	当你想为仅有的一些项渲染节点时，这种优先级的机制会十分有用-->
+		    <li v-for="todo in todos"  v-if="todo.isComplete">
+			  {{ todo.name}}
+			</li>
+		    
+			 
+			 <!--//v-for难点-->
+			  <!--为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，
+	     	     你需要为每项提供一个唯一 key 属性。理想的 key 值是每项都有的且唯一的 id-->
+	     	    <!--<div v-for="item in items" :key="item.id">
+				  <!-- 内容 -->
+				<!--</div>-->
+			   <!--建议尽可能在使用 v-for 时提供 key，除非遍历输出的 DOM 内容非常简单，或者是刻意依赖默认行为以获取性能上的提升。-->
+				
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el: '#example',
+			data: {
+				items:[
+				  {message:"hellow"},
+				  {message:"world"}
+				
+				],
+				arrs:['chenjun','liunianshixue','chenjun'],
+				object:{
+					 firstName: 'John',
+			    	 lastName: 'Doe',
+			         age: 30
+				},
+				numbers:[1,2,3,4,5,6],
+				todos:[
+					{name:'aaaaaa',isComplete:true},
+					{name:'bbbbbbb',isComplete:false},
+					{name:'ccccccc',isComplete:true}
+				]
+					
+			},
+			methods:{
+				even:function(numbers){
+					return numbers.filter(function(number){   //此处的number是指对象中的每一项,数组中的每一个
+						console.log("number具体指： ",number);
+						return number % 2 ==0
+					})
+				}
+			}
+			
+		})
+		
+//		注意事项
+//			由于 JavaScript 的限制，Vue 不能检测以下变动的数组：
+//			1，当你利用索引直接设置一个项时，例如：vm.items[indexOfItem] = newValue
+//            vue代替方法
+//                   Vue.set(example1.items, indexOfItem, newValue)
+              
+//			2，当你修改数组的长度时，例如：vm.items.length = newLength
+//	
+	</script>
+
+</html>

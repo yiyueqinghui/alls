@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>钩子函数</title>
+    <script type="text/javascript" src="js/vue.js"></script>
+<body>
+<h2>理解：</h2>
+<p>
+   beforecreated：el 和 data 并未初始化   <br/>
+   created:完成了 data 数据的初始化，el没有   <br/>
+   beforeMount：完成了 el 和 data 初始化    <br/>
+   mounted ：完成挂载   <br/>
+</p>
+
+<h2>常用场景：</h2>
+<p>
+   beforecreate : 举个栗子：可以在这加个loading事件        <br/>
+   created ：在这结束loading，还做一些初始化，实现函数自执行    <br/>
+   mounted ： 在这发起后端请求，拿回数据，配合路由钩子做一些事情     <br/>
+   beforeDestory： 你确认删除XX吗？         <br/>
+   destoryed ：当前组件已被删除，清空相关内容
+</p>
+
+<hr/>
+<div id="app">
+    <p>{{ message }}</p>
+    <input type="button" @click="change" value="更新数据" />
+    <input type="button" @click="destroy" value="销毁" />
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message : "Welcome Vue"
+        },
+        methods:{
+            change() {
+                this.message = 'Datura is me';
+            },
+            destroy() {
+                vm.$destroy();
+            }
+        },
+        beforeCreate: function () {
+            console.group('beforeCreate 创建前状态===============》');
+            console.log("%c%s", "color:red","el     : " + this.$el); //undefined
+            console.log("%c%s", "color:red","data   : " + this.$data); //undefined
+            console.log("%c%s", "color:red","message: " + this.message);//undefined
+        },
+        created: function () {
+            console.group('created 创建完毕状态===============》');
+            console.log("%c%s", "color:red","el     : " + this.$el); //undefined
+            console.log("%c%s", "color:green","data   : " + this.$data); //[object Object]  =>  已被初始化
+            console.log("%c%s", "color:green","message: " + this.message); //Welcome Vue  =>  已被初始化
+        },
+        beforeMount: function () {
+            console.group('beforeMount 挂载前状态===============》');
+            console.log("%c%s", "color:green","el     : " + (this.$el)); //已被初始化
+            console.log(this.$el); // 当前挂在的元素
+            console.log("%c%s", "color:green","data   : " + this.$data); //已被初始化
+            console.log("%c%s", "color:green","message: " + this.message); //已被初始化
+        },
+        mounted: function () {
+            console.group('mounted 挂载结束状态===============》');
+            console.log("%c%s", "color:green","el     : " + this.$el); //已被初始化
+            console.log(this.$el);
+            console.log("%c%s", "color:green","data   : " + this.$data); //已被初始化
+            console.log("%c%s", "color:green","message: " + this.message); //已被初始化
+        },
+        beforeUpdate: function () {
+            alert("更新前状态");
+            console.group('beforeUpdate 更新前状态===============》'); //这里指的是页面渲染新数据之前
+            console.log("%c%s", "color:green","el     : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:green","data   : " + this.$data);
+            console.log("%c%s", "color:green","message: " + this.message);
+            alert("更新前状态2");
+        },
+        updated: function () {
+            console.group('updated 更新完成状态===============》');
+            console.log("%c%s", "color:green","el     : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:green","data   : " + this.$data);
+            console.log("%c%s", "color:green","message: " + this.message);
+        },
+        beforeDestroy: function () {
+            console.group('beforeDestroy 销毁前状态===============》');
+            console.log("%c%s", "color:red","el     : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:red","data   : " + this.$data);
+            console.log("%c%s", "color:red","message: " + this.message);
+        },
+        destroyed: function () {
+            console.group('destroyed 销毁完成状态===============》');
+            console.log("%c%s", "color:red","el     : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:red","data   : " + this.$data);
+            console.log("%c%s", "color:red","message: " + this.message)
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册全局指令—所有人都可以用</title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+	</head>
+	<body>
+	    <h4>注册全局指令—所有人都可以用</h4>
+		<hr/>
+		<div id="app">
+		    <div v-color='colorStatus'>一个普通的div元素</div>
+		</div>
+        
+	</body>
+	<script>
+	   Vue.directive('color',function(el,binding){      //指令名称注意不要加**v-**
+	        console.log(el);        //当前绑定自定义指令的元素，可以用来直接操作DOM
+			console.log(binding);    //一些参数，常用的  => binding.value(指令的值)
+			el.style.backgroundColor = binding.value;	   
+	   })
+     
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			   colorStatus:'yellow'
+			}
+	    })
+		
+		
+	</script>
+</html>

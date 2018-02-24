@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ref使用在子组件上，获取子组件的实例</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+  <!--尽管有prop事件，但有时任然需要再js中直接访问子组件。-->
+  <!--为此可以使用ref 为子组件指定一个应用ID-->
+<div id="app">
+    <div @click="tap">
+        <Home ref="title"></Home>
+    </div>
+</div>
+</body>
+<script>
+    var Home = {
+        template: `
+             <div class="home">
+                 <strong class="son">{{msg}}</strong>
+                 <h5 class="title" >儿子</h5>
+             </div>`,
+        data(){
+            return {
+                msg : 'information'
+            }
+        }
+
+    };
+    new Vue({
+        el: '#app',
+        components: {
+            Home
+        },
+        methods: {
+            tap() {
+                var dom = this.$refs.title;
+                console.log(dom);
+                var son = dom.$el;
+                console.log(son);
+                son.style.background = 'red';
+            }
+        }
+    })
+
+
+</script>
+</html>

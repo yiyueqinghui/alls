@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<p>初始值：{{name}}</p>
+			<!--方法一  通过方法来获取-->
+			<p>反转值：{{reverseStr()}}</p>  
+			
+				
+			<!--方法二  通过计算属性computed来获取-->
+			<!--<p>反转值：{{reverse}}</p>-->
+		</div>
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				name:'hellow'
+			},
+			methods:{
+				reverseStr:function(){
+					return this.name.split("").reverse().join('');
+				}
+			}
+//			计算属性
+//           computed:{
+//           	//默认get方法
+//           	reverse:function(){
+//           		return this.name.split("").reverse().join('');
+//           	}
+//           }
+		})
+		
+		
+//	计算属性和调用方法的区别:
+//	       计算属性有缓存,如果以后会调用多次,且结果不改变的话,可以利用缓存来提高效率
+//	      调用方法无缓存， 如果每次返回不同值,则使用函数方法,这样可以减少缓存
+	</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue-cli脚手架中 图片引用问题</title>
+	</head>
+	<style>
+		#example{
+			text-align: center;
+		}
+	</style>
+	<body>
+		<h4>
+			未搭建脚手架vue-cli引用img图片和在脚手架中使用img图片，有点不太一样，
+			未使用vue-cli，图片正常引入即可；
+			使用vue-cli,图片若是通过data数据引入，则需要使用require('图片路径')
+		</h4>
+		<p style="text-align: center;">
+			<a href="http://blog.csdn.net/wlonging/article/details/68068328">参考链接</a>
+		</p>
+		<div id="example" onreadystatechange="">
+		    <img :src="imgUrl"  />
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		var vm = new Vue({
+		  el: '#example',
+		  data: {
+             imgUrl:'img/imgurl.jpg'
+		  }
+		})
+	</script>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>多级动态路由传参(params/query)以及router-link常用属性（exact、tag、active-class）</title>
+		<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	</head>
+	<style>
+	   ul{
+	      overflow:hidden;
+	   }
+	   ul li{
+	      float:left;
+		  padding:5px 10px;
+		  list-style:none;
+	   }
+	   .router-link-active{
+	      color:red;
+	   }
+	   <!-- .router-link-exact-active{ -->
+	     <!-- color:blue; -->
+	   <!-- } -->
+	</style>
+	<body>
+	   
+		<div id="app">
+		    <p style="text-align:center">
+		    参考链接<a style="color:red" href="http://www.jb51.net/article/113427.htm">点此跳转</a>
+		    </p>
+		    <div>
+			   <ul>
+			      <li>
+				     <!-- exact 只有在路径为"/"时被激活 -->
+     			      <router-link to="/" exact >主页</router-link>
+				  </li>
+				  <li>
+				      <router-link to="/news" >新闻</router-link>
+				  </li>
+			   </ul>
+			</div>
+			<div>
+			   <router-view></router-view>
+			</div>
+		</div>
+		
+		<template id="news">
+		   <div>
+		      <h2>新闻页面</h2>
+			  <ul>
+				<li>
+				    <router-link :to="{path:'sanxi'}">山西</router-link>
+				</li>
+			    <li>
+				    <router-link :to="{name:'detail002',params:{id:'001'},query:{userId:123456}}" >国内</router-link>
+				</li>
+				<li>
+				    <router-link to="/news/guoji/002?a='duzuiliunian'">国际</router-link>
+				</li>
+			  </ul>
+			  <div>
+			       <router-view></router-view>
+			  </div>
+		   
+		   </div>
+		</template>
+   	</body>
+	<script>
+	   <!-- 组件 -->
+	    const home = {
+		   template:"<h2>主页面</h2>"
+		};
+		const news = {
+		   template:"#news"
+		};
+		const detail = {
+		   //注意事项，path 和 params 不能同时使用。如果要要params,请使用name
+		
+		   //路由path中的变量$route.params  params 的键值对在请求头header中可以查看到，不放在url中。
+		   //路由pth中的参数 $route.query   query的参数会拼接到url里边   比如：http://www.baidu.com/dd?id=100&&user='cjj'
+		   //路由path值 $route.path   
+		   template:"<p>{{$route.params}}=>  {{$route.query}} =>{{$route.path}}</p>"
+		}
+		
+		
+		<!-- 配置路由 -->
+		const routes = [
+		    {
+			  path:"/",         <!-- 默认路由 -->
+			  component:home
+			},
+		    {
+			  path:"/home",
+			  component:home
+			},
+			{
+			  path:"/news",
+			  component:news,
+			  children:[
+			     {
+				   path:"/",
+				   name:"detail001",
+				   redirect:'sanxi'
+				 },
+			     {
+				   path:'sanxi',
+				   component:detail
+				 },
+			     {
+				   path:"guonei/:id",
+				   name:"detail002",
+				   component:detail
+				 },
+				 {
+				   path:"guoji/:ids",
+				   component:detail
+				 }
+			  ]
+			}
+			
+		]
+		//生成路由实例
+		const router = new VueRouter({
+		    routes
+		})
+		
+		//挂在到vue实例上
+		var vm = new Vue({
+			el:'#app',   
+			data:{
+			  
+			},
+			router
+	    })
+		
+		
+	</script>
+</html>

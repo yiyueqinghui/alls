@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件</title>
+	</head>
+
+	<body>
+        <div id="example">
+        	<!--全局组件-->
+        	<my-component >
+        	
+        	</my-component>
+        	
+        	
+        	<!--组件组合,数据传递-->
+        	<!--使用 Prop 传递数据-->
+        </div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		var mess = {
+			info:"局部组件，只能在父组件下调用"
+		}
+		Vue.component("my-component",{
+			template:"<div></div>"
+			
+		})
+		var Child = {
+			template:'<b>{{info}}</b>',
+			data:function(){                            //注意事项： 组件下的data, 必须是函数, 返回一个对象的形式,这样来读取数据
+				return mess
+			}
+			
+		}
+		var vm = new Vue({
+			el: '#example',
+			data:{
+				
+			},
+			components:{
+				'my-component':Child
+			}
+			
+		})
+	</script>
+
+</html>

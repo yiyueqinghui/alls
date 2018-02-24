@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件的data属性必须是函数</title>
+	</head>
+	<body>
+		<div id="app">
+			<my-div></my-div>
+		</div>
+		<template id="my_div">
+			<div>
+				<div>我是</div>
+			    <input type="date" />
+			    <p>{{message}}</p>
+			</div>
+		</template>
+	
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+	//1，注意：组件的data属性必须是函数,其数据必须放在返回值中
+	    Vue.component('my-div',{
+	    	template:"#my_div",
+	    	data:function(){
+	    		return {
+	    			message:'hellow!'
+	    		}
+	    	}
+	    })
+		new Vue({
+			el:"#app",
+			data:{
+			  msg:'今天的天气很好！！！'	
+			}
+			
+		})
+		
+		
+		
+	
+	</script>
+</html>

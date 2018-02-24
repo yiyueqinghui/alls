@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>class与style的绑定</title>
+	</head>
+    <style>
+    	.active{
+    		color: red;
+    	}
+    	.text-danger{
+    		background-color: yellow;
+    	}
+    </style>
+	<body>
+		<p>
+			
+		</p>
+		<div id="example" onreadystatechange="">
+		  <div class="static"  v-bind:class="{ active: isActive, 'text-danger': hasError }">
+               <!--绑定的数据对象active  text-danger不必内联定义在模板里-->
+                111111
+		  </div>
+		  <!--style绑定方法-->
+		  <!--方法一 直接绑定-->
+		  <div v-bind:style="{ color:'blue', fontSize: fontSize + 'px' }">
+		         222222
+		  </div>
+		  <!--方法二  绑定到一个数据对象上-->
+		  <div v-bind:style="styleObject">
+		  	    33333333
+		  </div>
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		var vm = new Vue({
+		  el: '#example',
+		  data: {
+//		  	class绑定
+		    isActive:true,
+		    hasError:false,
+
+//		    style绑定
+		    fontSize:30,
+		    
+		    styleObject:{
+		    	color:"red",
+		    	fontSize:"45px"
+		    }
+		    
+		    
+		  }
+		})
+	</script>
+
+</html>

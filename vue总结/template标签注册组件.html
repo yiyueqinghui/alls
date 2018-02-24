@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>template标签注册组件</title>
+	</head>
+	<body>
+		<div id="app">
+			<my-div></my-div>
+		</div>
+		<template id="my_div">
+			<div>
+				<div>我是</div>
+			    <input type="date" />
+			</div>
+		</template>
+	
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+	//1，组件的实例化
+	    Vue.component('my-div',{
+	    	template:"#my_div"
+	    })
+		new Vue({
+			el:"#app",
+			data:{
+			  msg:'今天的天气很好！！！'	
+			}
+			
+		})
+		
+		
+		
+	
+	</script>
+</html>
